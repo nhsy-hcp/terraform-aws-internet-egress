@@ -50,7 +50,7 @@ module "ec2_external_private" {
   }
 
   vpc_security_group_ids = [
-    module.sg_external.security_group_id
+    module.sg_external_allow_all.security_group_id
   ]
 
   depends_on = [
@@ -80,7 +80,7 @@ module "ec2_internal" {
   }
 
   vpc_security_group_ids = [
-    module.sg_internal.security_group_id
+    module.sg_internal_allow_all.security_group_id
   ]
 
   depends_on = [

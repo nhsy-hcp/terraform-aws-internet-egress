@@ -1,7 +1,7 @@
 resource "aws_ec2_transit_gateway" "shared" {
-  amazon_side_asn                = 65101
+  amazon_side_asn                = var.tgw_amazon_side_asn
   auto_accept_shared_attachments = "enable"
-  description                    = "X-Account Transit Gateway"
+  description                    = "Shared Transit Gateway"
 
   default_route_table_association = "enable"
   default_route_table_propagation = "enable"
@@ -35,8 +35,6 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "internal" {
 
   transit_gateway_default_route_table_association = true
   transit_gateway_default_route_table_propagation = true
-
-
 
   tags = {
     "Name" : "tgw-attach-internal"

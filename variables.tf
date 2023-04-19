@@ -21,3 +21,8 @@ variable "aws_account_id" {
 variable "owner" {
   type = string
 }
+
+variable "tgw_amazon_side_asn" {
+  type    = string
+  default = "65101"
+}

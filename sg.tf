@@ -1,8 +1,8 @@
-module "sg_external" {
+module "sg_external_allow_all" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "~> 4.17.0"
 
-  name        = "vpc-external"
+  name        = "external-allow-all"
   description = "Security group for EC2 instance"
   vpc_id      = module.vpc_external.vpc_id
 
@@ -11,11 +11,11 @@ module "sg_external" {
   egress_rules        = ["all-all"]
 }
 
-module "sg_internal" {
+module "sg_internal_allow_all" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "~> 4.17.0"
 
-  name        = "vpc-internal"
+  name        = "internal-allow-all"
   description = "Security group for EC2 instance"
   vpc_id      = module.vpc_internal.vpc_id
 

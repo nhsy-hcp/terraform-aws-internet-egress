@@ -1,14 +1,16 @@
 .PHONY: all init deploy plan destroy fmt clean
 
-all: deploy
+all: init deploy
 
 init: fmt
 	@aws sts get-caller-identity
 	@terraform init
 
 deploy: init
+	@terraform validate
 	@terraform apply -auto-approve
 	@cp routes.tf.tpl routes.tf
+	@terraform init
 	@terraform apply -auto-approve
 
 plan: init
