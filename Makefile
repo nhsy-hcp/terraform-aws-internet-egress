@@ -8,9 +8,14 @@ init: fmt
 
 deploy: init
 	@terraform validate
-	@terraform apply -auto-approve
-	@cp routes.tf.tpl routes.tf
-	@terraform init
+	@terraform apply -auto-approve \
+		-target module.vpc_external \
+		-target module.vpc_internal \
+		-target aws_ec2_transit_gateway.shared \
+		-target aws_ec2_transit_gateway_vpc_attachment.external \
+		-target aws_ec2_transit_gateway_vpc_attachment.internal
+#	@cp routes.tf.tpl routes.tf
+#	@terraform init
 	@terraform apply -auto-approve
 
 plan: init
@@ -19,7 +24,7 @@ plan: init
 
 destroy: init
 	@terraform destroy -auto-approve
-	-@rm routes.tf
+#	-@rm routes.tf
 
 fmt:
 	@terraform fmt -recursive
